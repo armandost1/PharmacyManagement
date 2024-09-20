@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="pharmacy_medicine_category_form_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.category.form</field>
+            <field name="model">pharmacy.medicine.category</field>
+            <field name="arch" type="xml">
+                <form string="Medicine Category">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Category Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_category_tree_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.category.tree</field>
+            <field name="model">pharmacy.medicine.category</field>
+            <field name="arch" type="xml">
+                <tree string="Medicine Categories">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_category_act_window" model="ir.actions.act_window">
+            <field name="name">Medicine Categories</field>
+            <field name="res_model">pharmacy.medicine.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Medicine Categories" id="pharmacy_medicine_category_menu" parent="pharmacy_root_menu" action="pharmacy_medicine_category_act_window"/>
+
+    </data>
+</odoo>

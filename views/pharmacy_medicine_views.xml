@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="pharmacy_medicine_form_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.form</field>
+            <field name="model">pharmacy.medicine</field>
+            <field name="arch" type="xml">
+                <form string="Pharmacy Medicine">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="category_id" placeholder="Select Medicine Category" />
+                                <field name="supplier_id" placeholder="Select Supplier" />
+                                <field name="reorder_level" placeholder="Enter Reorder Level"/>
+                            </group>
+                            <group>
+                                <field name="expiry_date" placeholder="Enter Expiry Date" />
+                                <field name="quantity" placeholder="Enter the quantity in stock"/>
+                                <field name="price" placeholder="Enter Price"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_tree_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.tree</field>
+            <field name="model">pharmacy.medicine</field>
+            <field name="arch" type="xml">
+                <tree string="Pharmacy Medicine">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="supplier_id"/>
+                    <field name="expiry_date"/>
+                    <field name="quantity"/>
+                    <field name="price"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_graph_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.graph</field>
+            <field name="model">pharmacy.medicine</field>
+            <field name="arch" type="xml">
+                <graph string="Pharmacy Medicine">
+                    <field name="name" string="Medicine"/>
+                    <field name="price" type="measure" string="Price"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_pivot_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.pivot</field>
+            <field name="model">pharmacy.medicine</field>
+            <field name="arch" type="xml">
+                <pivot string="Pharmacy Medicine">
+                    <field name="name" type="row" string="Medicine"/>
+                    <field name="price" type="col" string="Price"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_search_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.search</field>
+            <field name="model">pharmacy.medicine</field>
+            <field name="arch" type="xml">
+                <search>
+                    <searchpanel>
+                        <field name="category_id" icon="fa-list" select="multi" enable_counters="1" string="Category"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_kanban_view" model="ir.ui.view">
+            <field name="name">pharmacy.medicine.kanban</field>
+            <field name="model">pharmacy.medicine</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name" />
+                    <field name="price" />
+                    <field name="category_id"/>
+                    <field name="expiry_date"/>
+                    <field name="quantity" placeholder="Enter the quantity in stock"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                    <div class="oe_kanban_tags">
+                                        <field name="price"/>
+                                        <t t-if="record.quantity &lt; record.reorder_level">
+                                            <span class="badge bg-danger">Low Stock</span>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="pharmacy_medicine_act_window" model="ir.actions.act_window">
+            <field name="name">Pharmacy Medicine</field>
+            <field name="res_model">pharmacy.medicine</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There are no medicines yet. Click here to add a new medicine.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Medicine" id="pharmacy_medicine_menu" parent="pharmacy_root_menu" action="pharmacy_medicine_act_window"/>
+    </data>
+</odoo>

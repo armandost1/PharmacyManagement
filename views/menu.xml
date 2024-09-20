@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="pharmacy_root_menu" name="Pharmacy Management" sequence="1"/>
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="pharmacy_restock_order_form_view" model="ir.ui.view">
+            <field name="name">pharmacy.restock.order.form</field>
+            <field name="model">pharmacy.restock.order</field>
+            <field name="arch" type="xml">
+                <form string="Restock Order">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="medicine_id"/>
+                            <h1>
+                                <field name="medicine_id" placeholder="Select the medicine to restock"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="supplier_id" placeholder="Select the supplier"/>
+                                <field name="quantity" placeholder="Enter the quantity"/>
+                                <field name="order_date" placeholder="Select the order date"/>
+                            </group>
+                            <group>
+                                <field name="state"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_send" type="object" string="Send"/>
+                            <button name="action_receive" type="object" string="Receive"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pharmacy_restock_order_tree_view" model="ir.ui.view">
+            <field name="name">pharmacy.restock.order.tree</field>
+            <field name="model">pharmacy.restock.order</field>
+            <field name="arch" type="xml">
+                <tree string="Restock Orders">
+                    <field name="medicine_id"/>
+                    <field name="supplier_id"/>
+                    <field name="quantity"/>
+                    <field name="order_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharmacy_restock_order_act_window" model="ir.actions.act_window">
+            <field name="name">Restock Orders</field>
+            <field name="res_model">pharmacy.restock.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Restock Orders" id="pharmacy_restock_order_menu" parent="pharmacy_root_menu" action="pharmacy_restock_order_act_window"/>
+
+    </data>
+</odoo>
