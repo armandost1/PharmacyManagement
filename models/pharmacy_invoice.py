@@ -1,4 +1,3 @@
-
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
@@ -6,10 +5,9 @@ from odoo.exceptions import ValidationError
 class Invoice(models.Model):
     _name = 'pharmacy.invoice'
     _description = 'Invoice'
-
+    _rec_name = 'code'
 
     code = fields.Char(string='Code', required=True, default='New')
-    invoice_number = fields.Char(string='Invoice Number', readonly=True)
     employee_id = fields.Many2one('pharmacy.employee', string='Employee')
     invoice_date = fields.Date(string='Invoice Date', default=fields.Date.today)
     amount_total = fields.Float(string='Total Amount', compute='_compute_amount_total', store=True)
@@ -38,8 +36,8 @@ class Invoice(models.Model):
                 raise ValidationError("An invoice must have at least one invoice line.")
 
 
-    def action_send(self):
-        self.write({'state': 'confirmed'})  # Make sure this method modifies the state
+    def action_draft(self):
+        self.write({'state': 'confirmed'})
         for record in self:
             record.payment_status = 'unpaid'
 

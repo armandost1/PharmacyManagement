@@ -37,7 +37,6 @@
             <field name="arch" type="xml">
                 <tree string="Pharmacy Medicine">
                     <field name="name"/>
-                    <field name="category_id"/>
                     <field name="supplier_id"/>
                     <field name="expiry_date"/>
                     <field name="quantity"/>
@@ -68,18 +67,6 @@
             </field>
         </record>
 
-        <record id="pharmacy_medicine_search_view" model="ir.ui.view">
-            <field name="name">pharmacy.medicine.search</field>
-            <field name="model">pharmacy.medicine</field>
-            <field name="arch" type="xml">
-                <search>
-                    <searchpanel>
-                        <field name="category_id" icon="fa-list" select="multi" enable_counters="1" string="Category"/>
-                    </searchpanel>
-                </search>
-            </field>
-        </record>
-
         <record id="pharmacy_medicine_kanban_view" model="ir.ui.view">
             <field name="name">pharmacy.medicine.kanban</field>
             <field name="model">pharmacy.medicine</field>
@@ -88,7 +75,6 @@
                     <field name="id"/>
                     <field name="name" />
                     <field name="price" />
-                    <field name="category_id"/>
                     <field name="expiry_date"/>
                     <field name="quantity" placeholder="Enter the quantity in stock"/>
                     <templates>
