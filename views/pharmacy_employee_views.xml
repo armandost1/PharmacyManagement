@@ -15,6 +15,7 @@
                             </h1>
                         </div>
                         <group>
+                            <field name="image" widget="image"/>
                             <field name="position"/>
                             <field name="email"/>
                             <field name="phone"/>
@@ -36,7 +37,6 @@
                 </tree>
             </field>
         </record>
-
         <record id="pharmacy_employee_kanban_view" model="ir.ui.view">
             <field name="name">pharmacy.employee.kanban</field>
             <field name="model">pharmacy.employee</field>
@@ -49,6 +49,10 @@
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click">
                                 <div class="oe_kanban_details">
+                                    <div style="font-size:20px;" class="o_kanban_image_fill_top">
+                                        <img t-att-src="kanban_image('pharmacy.employee','image', record.id.raw_value)"
+                                        style="width:100%; height:166px;"/>
+                                    </div>
                                     <strong>
                                         <field name="name"/>
                                     </strong>
@@ -65,7 +69,6 @@
                 </kanban>
             </field>
         </record>
-
         <record id="pharmacy_employee_act_window" model="ir.actions.act_window">
             <field name="name">Employees</field>
             <field name="res_model">pharmacy.employee</field>
