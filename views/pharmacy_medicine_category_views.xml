@@ -29,7 +29,6 @@
                 <tree string="Medicine Categories">
                     <field name="name"/>
                     <field name="description"/>
-                    <field name="total_quantity"/>
                 </tree>
             </field>
         </record>
