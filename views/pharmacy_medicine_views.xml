@@ -85,7 +85,7 @@
                                         <field name="name"/>
                                     </strong>
                                     <div class="oe_kanban_tags">
-                                        <field name="price"/>
+                                        <span>Price: <field name="price"/>$</span>
                                         <t t-if="record.quantity &lt; record.reorder_level">
                                             <span class="badge bg-danger">Low Stock</span>
                                         </t>

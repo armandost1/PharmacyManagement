@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <record id="pharmacy_supplier_form_view" model="ir.ui.view">
             <field name="name">pharmacy.supplier.form</field>
             <field name="model">pharmacy.supplier</field>
             <field name="arch" type="xml">
                 <form string="Supplier">
                     <sheet>
-                        <notebook>
-                            <page string="General Information">
-                                <group>
-                                    <field name="name" placeholder="Supplier Name"/>
-                                    <field name="company_name" placeholder="Company Name"/>
-                                    <field name="phone" placeholder="Phone Number"/>
-                                    <field name="email" placeholder="Email Address"/>
-                                </group>
-                            </page>
-                            <page string="Address">
-                                <group>
-                                    <field name="address" placeholder="Supplier Address"/>
-                                </group>
-                            </page>
-                        </notebook>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="image" widget="image"/>
+                            <field name="company_name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="address"/>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -32,21 +29,46 @@
             <field name="name">pharmacy.supplier.tree</field>
             <field name="model">pharmacy.supplier</field>
             <field name="arch" type="xml">
-                <tree string="Suppliers">
+                <tree string="Supplier">
                     <field name="name"/>
                     <field name="company_name"/>
-                    <field name="phone"/>
                     <field name="email"/>
+                    <field name="phone"/>
                 </tree>
+            </field>
+        </record>
+
+        <record id="pharmacy_supplier_kanban_view" model="ir.ui.view">
+            <field name="name">pharmacy.supplier.kanban</field>
+            <field name="model">pharmacy.supplier</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="company_name"/>
+                    <field name="email"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <div style="font-size:20px;" class="o_kanban_image_fill_top">
+                                        <img t-att-src="kanban_image('pharmacy.supplier','image', record.id.raw_value)"
+                                             style="width:100%; height:166px;"/>
+                                    </div>
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
             </field>
         </record>
 
         <record id="pharmacy_supplier_act_window" model="ir.actions.act_window">
             <field name="name">Suppliers</field>
             <field name="res_model">pharmacy.supplier</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="pharmacy_supplier_tree_view"/>
-            <field name="target">current</field>
+            <field name="view_mode">kanban,tree,form</field>
         </record>
 
         <menuitem name="Suppliers" id="pharmacy_supplier_menu" parent="pharmacy_root_menu" action="pharmacy_supplier_act_window"/>

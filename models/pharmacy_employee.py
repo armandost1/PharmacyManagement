@@ -20,9 +20,9 @@ class Employee(models.Model):
 
     @api.constrains('phone')
     def _check_phone(self):
-        for record in self:
-            if record.phone:
-                if not record.phone.isdigit():
+        for number in self:
+            if number.phone:
+                if not number.phone.isdigit():
                     raise UserError("The phone number must contain only digits.")
-                if len(record.phone) > 15:
+                if len(number.phone) > 15:
                     raise UserError("The phone number must contain up to 15 digits.")

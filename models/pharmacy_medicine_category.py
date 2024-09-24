@@ -27,6 +27,6 @@ class PharmacyMedicineCategory(models.Model):
                         self.env['pharmacy.medicine'].search([('category_id', '=', category.id)]))
             category.total_quantity = total
 
-    def _update_category_quantity(self):
+    def _update_quantity(self):
         for category in self:
             category.total_quantity = sum(medicine.quantity for medicine in category.medicine_ids)
