@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class Invoice(models.Model):
     _name = 'pharmacy.invoice'
@@ -28,13 +29,11 @@ class Invoice(models.Model):
     def _compute_amount_total(self):
         for record in self:
             record.amount_total = sum(line.subtotal for line in record.invoice_line_ids)
-
     @api.constrains('invoice_line_ids')
     def _check_invoice_lines(self):
         for record in self:
             if not record.invoice_line_ids:
                 raise ValidationError("An invoice must have at least one invoice line.")
-
 
     def action_draft(self):
         self.write({'state': 'confirmed'})
@@ -86,4 +85,23 @@ class InvoiceLine(models.Model):
             if line.price_unit <= 0:
                 raise ValidationError("Unit Price must be positive.")
 
+    @api.model
+    def create(self, values):
+        medicine = self.env['pharmacy.medicine'].browse(values['medicine_id'])
+        if medicine.quantity < values['quantity']:
+            raise ValidationError(f"Not enough stock for {medicine.name}. Available quantity is {medicine.quantity}.")
+        medicine.quantity -= values['quantity']
+        medicine.write({'quantity': medicine.quantity})
+        medicine.check_reorder()
+        _logger.info(
+            f"Current stock for '{medicine.name}': {medicine.quantity},"
+            f" Reorder Level: {medicine.reorder_level}")
 
+        return super(InvoiceLine, self).create(values)
+
+    def write(self, values):
+        res = super(InvoiceLine, self).write(values)
+        for line in self:
+            line.medicine_id.category_id._update_category_quantity()
+            line.medicine_id.check_reorder()
+        return res

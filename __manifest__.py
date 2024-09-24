@@ -15,7 +15,6 @@
         'views/pharmacy_invoice_views.xml',
         'views/pharmacy_medicine_category_views.xml',
         'views/pharmacy_supplier_views.xml',
-        'views/pharmacy_reorder_stock_views.xml',
     ],
     'installable': True,
     'auto_install': False,

@@ -73,10 +73,10 @@
             <field name="arch" type="xml">
                 <kanban>
                     <field name="id"/>
-                    <field name="name" />
-                    <field name="price" />
+                    <field name="name"/>
+                    <field name="price"/>
                     <field name="expiry_date"/>
-                    <field name="quantity" placeholder="Enter the quantity in stock"/>
+                    <field name="quantity"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click">

@@ -29,6 +29,7 @@
                 <tree string="Medicine Categories">
                     <field name="name"/>
                     <field name="description"/>
+                    <field name="total_quantity"/>
                 </tree>
             </field>
         </record>
@@ -49,6 +50,7 @@
 
                                     <div style="margin-bottom: 20px;">
                                         <field name="description"/>
+                                        <field name="total_quantity"/>
                                     </div>
 
                                     <button type="object" name="action_view_medicines"
