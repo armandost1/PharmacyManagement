@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="pharmacy_buying_invoice_form_view" model="ir.ui.view">
+            <field name="name">pharmacy.buying.invoice.form</field>
+            <field name="model">pharmacy.buying.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Buying Invoice">
+                    <header>
+                        <button name="action_done" type="object" string="Move to Done" class="btn-secondary"
+                                invisible="state != 'draft'"/>
+                        <button name="action_paid" type="object" string="Move to Paid" class="btn-primary"
+                                invisible="state != 'done'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="paid"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="code"/>
+                            <h1>
+                                <field name="code" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="supplier_id"/>
+                                <field name="invoice_date"/>
+                            </group>
+                            <group>
+                                <field name="amount_total" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="invoice_lines" string="Invoice Lines">
+                                <field name="buying_invoice_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="medicine_id"/>
+                                        <field name="quantity"/>
+                                        <field name="price_unit" readonly="1"/>
+                                        <field name="subtotal" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pharmacy_buying_invoice_tree_view" model="ir.ui.view">
+            <field name="name">pharmacy.buying.invoice.tree</field>
+            <field name="model">pharmacy.buying.invoice</field>
+            <field name="arch" type="xml">
+                <tree string="Buying Invoices">
+                    <field name="code"/>
+                    <field name="supplier_id"/>
+                    <field name="invoice_date"/>
+                    <field name="amount_total"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharmacy_buying_invoice_kanban_view" model="ir.ui.view">
+            <field name="name">pharmacy.buying.invoice.kanban</field>
+            <field name="model">pharmacy.buying.invoice</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="amount_total" widget='monetary'/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <strong>
+                                    <field name="code"/>
+                                </strong>
+                                <div>
+                                    <field name="amount_total" widget='monetary'/>
+                                    <span><field name="state"/></span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="pharmacy_buying_invoice_act_window" model="ir.actions.act_window">
+            <field name="name">Buying Invoices</field>
+            <field name="res_model">pharmacy.buying.invoice</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <menuitem name="Buying Invoices" id="pharmacy_buying_invoice_menu" parent="pharmacy_root_menu" action="pharmacy_buying_invoice_act_window"/>
+    </data>
+</odoo>
