@@ -7,9 +7,11 @@
             <field name="arch" type="xml">
                 <form string="Selling Invoice">
                     <header>
-                        <button name="action_done" type="object" string="Move to Done" class="btn-secondary"
+                        <button name="action_done" type="object" string="Move to Done"
+                                class="btn btn-success"
                                 invisible="state != 'draft'"/>
-                        <button name="action_paid" type="object" string="Move to Paid" class="btn-primary"
+                        <button name="action_paid" type="object" string="Move to Paid"
+                                class="btn btn-warning"
                                 invisible="state != 'done'"/>
                         <field name="state" widget="statusbar" statusbar_visible="paid"/>
                     </header>
@@ -42,6 +44,11 @@
                             </page>
                         </notebook>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -65,7 +72,7 @@
             <field name="model">pharmacy.selling.invoice</field>
             <field name="arch" type="xml">
                 <kanban>
-                    <field name="amount_total" widget='monetary'/>
+                    <field name="amount_total"/>
                     <field name="state"/>
                     <templates>
                         <t t-name="kanban-box">
@@ -74,7 +81,7 @@
                                     <field name="code"/>
                                 </strong>
                                 <div>
-                                    <field name="amount_total" widget='monetary'/>
+                                    <field name="amount_total"/>
                                     <span><field name="state"/></span>
                                 </div>
                             </div>

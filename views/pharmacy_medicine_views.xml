@@ -58,8 +58,8 @@
                     <field name="name"/>
                     <field name="price"/>
                     <field name="expiry_date"/>
-                    <field name="image"/>
                     <field name="quantity"/>
+                    <field name="image"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_res_partner_kanban o_kanban_record_has_image_fill">
@@ -73,6 +73,9 @@
                                         </strong>
                                         <div class="oe_kanban_tags">
                                             <span>Price: <field name="price"/>$</span>
+                                        </div>
+                                        <div class="oe_kanban_tags">
+                                            <span>Qty: <field name="quantity"/></span>
                                         </div>
                                     </div>
                                 </div>

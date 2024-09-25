@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 
 class SellingInvoice(models.Model):
     _name = 'pharmacy.selling.invoice'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Selling Invoice'
     _rec_name = 'code'
 
@@ -31,13 +32,9 @@ class SellingInvoice(models.Model):
                 raise UserError("A selling invoice must have at least one invoice line.")
 
     def action_done(self):
-        """
-        Move the invoice to the done state and reduce the stock.
-        """
         if self.state != 'draft':
             raise UserError("Only draft invoices can be marked as done.")
 
-        # Adjust medicine stock only when invoice is marked as done
         for line in self.selling_invoice_line_ids:
             medicine = line.medicine_id
             if medicine.quantity < line.quantity:
@@ -45,12 +42,14 @@ class SellingInvoice(models.Model):
             medicine.quantity -= line.quantity
             medicine.write({'quantity': medicine.quantity})
 
+            # Post message for each line sold
+            self.message_post(
+                body=f'{line.quantity} units of {medicine.name} sold by {self.employee_id.name}.'
+            )
+
         self.write({'state': 'done'})
 
     def action_paid(self):
-        """
-        Move the invoice to the paid state.
-        """
         if self.state != 'done':
             raise UserError("Only done invoices can be marked as paid.")
         self.write({'state': 'paid'})
@@ -85,7 +84,15 @@ class SellingInvoiceLine(models.Model):
 
     @api.model
     def create(self, values):
-        medicine = self.env['pharmacy.medicine'].browse(values['medicine_id'])
+        invoice_id = values.get('selling_invoice_id')
+        medicine_id = values.get('medicine_id')
+        existing_line = self.search([('selling_invoice_id', '=', invoice_id),
+                                     ('medicine_id', '=', medicine_id)], limit=1)
+        if existing_line:
+            raise UserError("Each invoice line should have different medicines")
+
+        medicine = self.env['pharmacy.medicine'].browse(medicine_id)
         if medicine.quantity < values['quantity']:
             raise UserError(f"Not enough stock for {medicine.name}. Available quantity is {medicine.quantity}.")
+
         return super(SellingInvoiceLine, self).create(values)
