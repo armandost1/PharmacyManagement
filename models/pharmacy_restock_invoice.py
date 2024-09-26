@@ -15,7 +15,7 @@ class RestockInvoice(models.Model):
     state = fields.Selection(string='State', selection=[('draft', 'Draft'), ('done', 'Done'),
                                                         ('paid', 'Paid')], default='draft')
     restock_invoice_line_ids = fields.One2many('pharmacy.restock.invoice.line',
-                                              'restock_invoice_id', string='Restock Invoice Lines')
+                                               'restock_invoice_id', string='Restock Invoice Lines')
 
     @api.depends('restock_invoice_line_ids.subtotal')
     def _compute_amount_total(self):
@@ -30,10 +30,6 @@ class RestockInvoice(models.Model):
     def action_done(self):
         for invoice_line in self.restock_invoice_line_ids:
             invoice_line.medicine_id.quantity += invoice_line.quantity
-            self.message_post(
-                body=f'{invoice_line.quantity} units of {invoice_line.medicine_id.name}'
-                     f' bought from {self.supplier_id.name}.'
-            )
         self.state = 'done'
 
     def action_paid(self):
@@ -48,8 +44,14 @@ class RestockInvoiceLine(models.Model):
                                           string='Restock Invoice', ondelete='cascade')
     medicine_id = fields.Many2one('pharmacy.medicine', string='Medicine', required=True)
     quantity = fields.Integer(string='Quantity', required=True)
-    price_unit = fields.Float(string='Unit Price', related='medicine_id.price', store=True)
+    price_unit = fields.Float(string='Unit Price', compute='_compute_price_unit', store=True)
     subtotal = fields.Float(string='Subtotal', compute='_compute_subtotal', store=True)
+
+    @api.depends('medicine_id.price')
+    def _compute_price_unit(self):
+        for line in self:
+            if line.medicine_id:
+                line.price_unit = line.medicine_id.price * 0.8
 
     @api.depends('quantity', 'price_unit')
     def _compute_subtotal(self):

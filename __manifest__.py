@@ -6,7 +6,7 @@
     'category': 'Pharmacy',
     'author': 'Author',
     'website': 'Website',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail_bot'],
     'data': [
         'data/invoice_sequence.xml',
         'views/menu.xml',
@@ -17,6 +17,8 @@
         'views/pharmacy_supplier_views.xml',
         'views/pharmacy_restock_invoice_views.xml',
         'views/pharmacy_client_views.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'auto_install': False,

@@ -1,0 +1,21 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+pharmacy_employee_access_manager,pharmacy.employee access manager,model_pharmacy_employee,group_pharmacy_manager,1,1,1,1
+pharmacy_employee_access_seller,pharmacy.employee access seller,model_pharmacy_employee,group_pharmacy_seller,1,0,0,0
+pharmacy_sale_invoice_access_manager,pharmacy.sale.invoice access manager,model_pharmacy_sale_invoice,group_pharmacy_manager,1,1,1,1
+pharmacy_sale_invoice_access_seller,pharmacy.sale.invoice access seller,model_pharmacy_sale_invoice,group_pharmacy_seller,1,1,1,0
+pharmacy_sale_invoice_line_access_manager,pharmacy.sale.invoice.line access manager,model_pharmacy_sale_invoice_line,group_pharmacy_manager,1,1,1,1
+pharmacy_sale_invoice_line_access_seller,pharmacy.sale.invoice.line access seller,model_pharmacy_sale_invoice_line,group_pharmacy_seller,1,1,1,1
+pharmacy_restock_invoice_access_manager,pharmacy.restock.invoice access manager,model_pharmacy_restock_invoice,group_pharmacy_manager,1,1,1,1
+pharmacy_restock_invoice_access_seller,pharmacy.restock.invoice access seller,model_pharmacy_restock_invoice,group_pharmacy_seller,0,0,0,0
+pharmacy_restock_invoice_line_access_manager,pharmacy.restock.invoice.line access manager,model_pharmacy_restock_invoice_line,group_pharmacy_manager,1,1,1,1
+pharmacy_restock_invoice_line_access_seller,pharmacy.restock.invoice.line access seller,model_pharmacy_restock_invoice_line,group_pharmacy_seller,0,0,0,0
+pharmacy_client_access_manager,pharmacy.client access manager,model_pharmacy_client,group_pharmacy_manager,1,1,1,1
+pharmacy_client_access_seller,pharmacy.client access seller,model_pharmacy_client,group_pharmacy_seller,1,1,1,0
+pharmacy_medicine_access_manager,pharmacy.medicine access manager,model_pharmacy_medicine,group_pharmacy_manager,1,1,1,1
+pharmacy_medicine_access_seller,pharmacy.medicine access seller,model_pharmacy_medicine,group_pharmacy_seller,1,1,0,0
+pharmacy_medicine_category_access_manager,pharmacy.medicine.category access manager,model_pharmacy_medicine_category,group_pharmacy_manager,1,1,1,1
+pharmacy_medicine_category_access_seller,pharmacy.medicine.category access seller,model_pharmacy_medicine_category,group_pharmacy_seller,1,0,0,0
+pharmacy_supplier_access_manager,pharmacy.supplier access manager,model_pharmacy_supplier,group_pharmacy_manager,1,1,1,1
+pharmacy_supplier_access_seller,pharmacy.supplier access seller,model_pharmacy_supplier,group_pharmacy_seller,0,0,0,0
+
+

@@ -8,10 +8,12 @@ class Medicine(models.Model):
     _description = 'Medicine'
 
     name = fields.Char(string='Name', required=True, tracking=True)
-    price = fields.Float(string='Price', required=True, tracking=True)
+    price = fields.Float(string='Price', required=True,
+                         tracking=True)
     quantity = fields.Integer(string='Quantity in Stock', default=0, required=True, tracking=True)
     expiry_date = fields.Date(string='Expiry Date', tracking=True)
-    category_id = fields.Many2one('pharmacy.medicine.category', string='Category', required=True, tracking=True)
+    category_id = fields.Many2one('pharmacy.medicine.category', string='Category', required=True,
+                                  tracking=True)
     supplier_id = fields.Many2one('pharmacy.supplier', string='Supplier', tracking=True)
     image = fields.Image(string='Image')
     allergy_ids = fields.Many2many('pharmacy.client', string='Clients Allergic to This Medicine')

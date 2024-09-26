@@ -19,6 +19,7 @@
                             <field name="position"/>
                             <field name="email"/>
                             <field name="phone"/>
+                            <field name="salary"/>
                         </group>
                     </sheet>
                 </form>
@@ -34,6 +35,7 @@
                     <field name="position"/>
                     <field name="email"/>
                     <field name="phone"/>
+                    <field name="salary"/>
                 </tree>
             </field>
         </record>
@@ -45,6 +47,7 @@
                     <field name="name"/>
                     <field name="position"/>
                     <field name="email"/>
+                    <field name="salary"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click">

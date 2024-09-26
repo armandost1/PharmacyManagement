@@ -1,7 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
-
 class Employee(models.Model):
     _name = 'pharmacy.employee'
     _description = 'Employee'
@@ -11,6 +10,7 @@ class Employee(models.Model):
     email = fields.Char(string='Email')
     phone = fields.Char(string='Phone')
     image = fields.Image(string='Image')
+    salary = fields.Float(string='Salary', required=True)
 
     @api.constrains('email')
     def _check_email(self):

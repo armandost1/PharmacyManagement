@@ -45,11 +45,6 @@
                             </page>
                         </notebook>
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" groups="base.group_user"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
-                    </div>
                 </form>
             </field>
         </record>
@@ -93,7 +88,6 @@
                 </kanban>
             </field>
         </record>
-
         <record id="pharmacy_sale_invoice_act_window" model="ir.actions.act_window">
             <field name="name">Sale Invoices</field>
             <field name="res_model">pharmacy.sale.invoice</field>

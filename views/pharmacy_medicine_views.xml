@@ -16,13 +16,13 @@
                         </div>
                         <group>
                             <group>
-                                <field name="category_id" placeholder="Select Medicine Category"/>
+                                <field name="category_id" placeholder="Select Category"/>
                                 <field name="supplier_id" placeholder="Select Supplier"/>
                             </group>
                             <group>
                                 <field name="expiry_date" placeholder="Enter Expiry Date"/>
-                                <field name="quantity" readonly="1"/>
-                                <field name="price" placeholder="Enter Price"/>
+                                <field name="quantity" readonly="1" />
+                                <field name="price" placeholder="Enter Price" groups="pharmacy_management.group_pharmacy_manager"/>
                             </group>
                         </group>
                     </sheet>

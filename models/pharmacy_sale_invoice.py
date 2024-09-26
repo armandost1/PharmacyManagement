@@ -4,7 +4,6 @@ from odoo.exceptions import UserError
 
 class SaleInvoice(models.Model):
     _name = 'pharmacy.sale.invoice'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Sale Invoice'
     _rec_name = 'code'
 
@@ -42,9 +41,6 @@ class SaleInvoice(models.Model):
                 raise UserError(f"Not enough stock for {medicine.name}. Available: {medicine.quantity}.")
             medicine.quantity -= line.quantity
             medicine.write({'quantity': medicine.quantity})
-            self.message_post(
-                body=f'{line.quantity} units of {medicine.name} sold by {self.employee_id.name}.'
-            )
 
         self.write({'state': 'done'})
 

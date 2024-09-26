@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
         <menuitem id="pharmacy_root_menu" name="Pharmacy Management" sequence="1"/>
+
+        <menuitem id="pharmacy_medicine_menu" name="Medicines"
+                  parent="pharmacy_root_menu" sequence="1"/>
+
+        <menuitem id="pharmacy_restock_invoice_menu" name="Restock Invoices"
+                  parent="pharmacy_root_menu" sequence="2"/>
+
+        <menuitem id="pharmacy_sale_invoice_menu" name="Sale Invoices"
+                  parent="pharmacy_root_menu" sequence="3"/>
+
+        <menuitem id="pharmacy_medicine_category_menu" name="Category"
+                  parent="pharmacy_root_menu" sequence="4"/>
+
+        <menuitem id="pharmacy_employee_menu" name="Employee"
+                  parent="pharmacy_root_menu" sequence="5"/>
+
+        <menuitem id="pharmacy_supplier_menu" name="Suppliers"
+                  parent="pharmacy_root_menu" sequence="6"/>
+
+        <menuitem id="pharmacy_client_menu" name="Clients"
+                  parent="pharmacy_root_menu" sequence="7"/>
+
     </data>
 </odoo>
