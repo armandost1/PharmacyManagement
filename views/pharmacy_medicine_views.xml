@@ -59,7 +59,7 @@
                     <field name="price"/>
                     <field name="expiry_date"/>
                     <field name="quantity"/>
-                    <field name="image"/>
+                    <field name="image" widget="image" class="oe_avatar"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_res_partner_kanban o_kanban_record_has_image_fill">

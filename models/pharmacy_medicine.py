@@ -14,6 +14,7 @@ class Medicine(models.Model):
     category_id = fields.Many2one('pharmacy.medicine.category', string='Category', required=True, tracking=True)
     supplier_id = fields.Many2one('pharmacy.supplier', string='Supplier', tracking=True)
     image = fields.Image(string='Image')
+    allergy_ids = fields.Many2many('pharmacy.client', string='Clients Allergic to This Medicine')
 
     @api.constrains('price', 'quantity')
     def _check_positive_values(self):

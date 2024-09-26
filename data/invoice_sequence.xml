@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="sequence_pharmacy_selling_invoice" model="ir.sequence">
-            <field name="name">Pharmacy Selling Invoice</field>
-            <field name="code">pharmacy.selling.invoice</field>
+        <record id="sequence_pharmacy_sale_invoice" model="ir.sequence">
+            <field name="name">Pharmacy Sale Invoice</field>
+            <field name="code">pharmacy.sale.invoice</field>
             <field name="prefix">INV/</field>
             <field name="padding">5</field>
             <field name="number_next">1</field>
             <field name="number_increment">1</field>
         </record>
 
-        <record id="sequence_pharmacy_buying_invoice" model="ir.sequence">
-            <field name="name">Pharmacy Buying Invoice</field>
-            <field name="code">pharmacy.buying.invoice</field>
+        <record id="sequence_pharmacy_restock_invoice" model="ir.sequence">
+            <field name="name">Pharmacy Restock Invoice</field>
+            <field name="code">pharmacy.restock.invoice</field>
             <field name="prefix">INV/</field>
             <field name="padding">5</field>
             <field name="number_next">1</field>

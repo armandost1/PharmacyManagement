@@ -6,10 +6,10 @@ class Supplier(models.Model):
     _description = 'Supplier'
 
     name = fields.Char(string='Name', required=True)
-    phone = fields.Char(string='Phone')
-    email = fields.Char(string='Email')
+    phone = fields.Char(string='Phone', required=True)
+    email = fields.Char(string='Email', required=True)
     address = fields.Text(string='Address')
-    company_name = fields.Char(string='Company Name')
+    company_name = fields.Char(string='Company Name', required=True )
     image = fields.Image(string='Image')
 
     @api.constrains('email')

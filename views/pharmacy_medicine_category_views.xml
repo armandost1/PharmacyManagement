@@ -32,7 +32,6 @@
                 </tree>
             </field>
         </record>
-
         <record id="pharmacy_medicine_category_kanban_view" model="ir.ui.view">
             <field name="name">pharmacy.medicine.category.kanban</field>
             <field name="model">pharmacy.medicine.category</field>
@@ -40,21 +39,23 @@
                 <kanban>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click" style="width: 250px; height: 200px; border: 1px solid #ddd; padding: 10px;">
+                            <div class="oe_kanban_global_click" style="width: 300px; height: auto; border: 1px solid #ddd; border-radius: 5px; margin: 10px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                                 <div class="oe_kanban_content">
 
-                                    <div style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
+                                    <div style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px;">
                                         <field name="name"/>
                                     </div>
 
-                                    <div style="margin-bottom: 20px;">
+                                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
                                         <field name="description"/>
                                     </div>
 
-                                    <button type="object" name="action_view_medicines"
-                                            string="View Medicines"
-                                            class="btn btn-primary"
-                                            style="width: 100%; margin-top: 20px;"/>
+                                    <div style="text-align: right;">
+                                        <button type="object" name="action_view_medicines"
+                                                string="View Medicines"
+                                                class="btn btn-primary"
+                                                style="width: 100%; margin-top: 10px;"/>
+                                    </div>
                                 </div>
                             </div>
                         </t>

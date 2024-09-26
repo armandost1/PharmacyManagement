@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="pharmacy_selling_invoice_form_view" model="ir.ui.view">
-            <field name="name">pharmacy.selling.invoice.form</field>
-            <field name="model">pharmacy.selling.invoice</field>
+        <record id="pharmacy_restock_invoice_form_view" model="ir.ui.view">
+            <field name="name">pharmacy.restock.invoice.form</field>
+            <field name="model">pharmacy.restock.invoice</field>
             <field name="arch" type="xml">
-                <form string="Selling Invoice">
+                <form string="Restock Invoice">
                     <header>
                         <button name="action_done" type="object" string="Move to Done"
                                 class="btn btn-success"
@@ -24,8 +24,8 @@
                         </div>
                         <group>
                             <group>
-                                <field name="employee_id"/>
-                                <field name="invoice_date"/>
+                                <field name="supplier_id"/>
+                                <field name="invoice_date" readonly="1"/>
                             </group>
                             <group>
                                 <field name="amount_total" readonly="1"/>
@@ -33,7 +33,7 @@
                         </group>
                         <notebook>
                             <page name="invoice_lines" string="Invoice Lines">
-                                <field name="selling_invoice_line_ids">
+                                <field name="restock_invoice_line_ids">
                                     <tree editable="bottom">
                                         <field name="medicine_id"/>
                                         <field name="quantity"/>
@@ -53,13 +53,13 @@
             </field>
         </record>
 
-        <record id="pharmacy_selling_invoice_tree_view" model="ir.ui.view">
-            <field name="name">pharmacy.selling.invoice.tree</field>
-            <field name="model">pharmacy.selling.invoice</field>
+        <record id="pharmacy_restock_invoice_tree_view" model="ir.ui.view">
+            <field name="name">pharmacy.restock.invoice.tree</field>
+            <field name="model">pharmacy.restock.invoice</field>
             <field name="arch" type="xml">
-                <tree string="Selling Invoices">
+                <tree string="Restock Invoices">
                     <field name="code"/>
-                    <field name="employee_id"/>
+                    <field name="supplier_id"/>
                     <field name="invoice_date"/>
                     <field name="amount_total"/>
                     <field name="state"/>
@@ -67,9 +67,9 @@
             </field>
         </record>
 
-        <record id="pharmacy_selling_invoice_kanban_view" model="ir.ui.view">
-            <field name="name">pharmacy.selling.invoice.kanban</field>
-            <field name="model">pharmacy.selling.invoice</field>
+        <record id="pharmacy_restock_invoice_kanban_view" model="ir.ui.view">
+            <field name="name">pharmacy.restock.invoice.kanban</field>
+            <field name="model">pharmacy.restock.invoice</field>
             <field name="arch" type="xml">
                 <kanban>
                     <field name="amount_total"/>
@@ -81,8 +81,10 @@
                                     <field name="code"/>
                                 </strong>
                                 <div>
-                                    <field name="amount_total"/>
-                                    <span><field name="state"/></span>
+                                    <span>Total price: <field name="amount_total"/>$</span>
+                                </div>
+                                <div>
+                                    <field name="state"/>
                                 </div>
                             </div>
                         </t>
@@ -91,12 +93,12 @@
             </field>
         </record>
 
-        <record id="pharmacy_selling_invoice_act_window" model="ir.actions.act_window">
-            <field name="name">Selling Invoices</field>
-            <field name="res_model">pharmacy.selling.invoice</field>
+        <record id="pharmacy_restock_invoice_act_window" model="ir.actions.act_window">
+            <field name="name">Restock Invoices</field>
+            <field name="res_model">pharmacy.restock.invoice</field>
             <field name="view_mode">kanban,tree,form</field>
         </record>
 
-        <menuitem name="Selling Invoices" id="pharmacy_selling_invoice_menu" parent="pharmacy_root_menu" action="pharmacy_selling_invoice_act_window"/>
+        <menuitem name="Restock Invoices" id="pharmacy_restock_invoice_menu" parent="pharmacy_root_menu" action="pharmacy_restock_invoice_act_window"/>
     </data>
 </odoo>

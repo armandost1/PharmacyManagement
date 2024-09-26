@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pharmacy_client_form_view" model="ir.ui.view">
+        <field name="name">pharmacy.client.form</field>
+        <field name="model">pharmacy.client</field>
+        <field name="arch" type="xml">
+            <form string="Client">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="full_name" placeholder="Enter full name..." required="1"/>
+                        </group>
+                        <group>
+                            <field name="phone" placeholder="Enter phone number..." required="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="allergy_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pharmacy_client_tree_view" model="ir.ui.view">
+        <field name="name">pharmacy.client.tree</field>
+        <field name="model">pharmacy.client</field>
+        <field name="arch" type="xml">
+            <tree string="Clients">
+                <field name="full_name" string="Client Name"/>
+                <field name="phone" string="Phone Number"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pharmacy_client_act_window" model="ir.actions.act_window">
+        <field name="name">Clients</field>
+        <field name="res_model">pharmacy.client</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="pharmacy_client_tree_view"/>
+    </record>
+
+    <menuitem id="pharmacy_client_menu" name="Clients" parent="pharmacy_root_menu" action="pharmacy_client_act_window"/>
+</odoo>
