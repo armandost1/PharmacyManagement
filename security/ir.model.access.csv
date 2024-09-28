@@ -17,5 +17,10 @@ pharmacy_medicine_category_access_manager,pharmacy.medicine.category access mana
 pharmacy_medicine_category_access_seller,pharmacy.medicine.category access seller,model_pharmacy_medicine_category,group_pharmacy_seller,1,0,0,0
 pharmacy_supplier_access_manager,pharmacy.supplier access manager,model_pharmacy_supplier,group_pharmacy_manager,1,1,1,1
 pharmacy_supplier_access_seller,pharmacy.supplier access seller,model_pharmacy_supplier,group_pharmacy_seller,0,0,0,0
+pharmacy_shift_access_manager,pharmacy.shift access manager,model_pharmacy_shift,group_pharmacy_manager,1,1,1,1
+pharmacy_shift_access_seller,pharmacy.shift access seller,model_pharmacy_shift,group_pharmacy_seller,1,0,0,0
+
+
+
 
 

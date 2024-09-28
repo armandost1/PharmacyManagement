@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_update_shift_dates" model="ir.cron">
+            <field name="name">Update Shift Dates</field>
+            <field name="model_id" ref="pharmacy_management.model_pharmacy_shift"/> <!-- Replace with your actual module name -->
+            <field name="state">code</field>
+            <field name="code">model.update_shift_dates()</field>
+            <field name="active" eval="True"/>
+            <field name="interval_type">days</field>
+            <field name="interval_number" eval="1"/>
+            <field name="numbercall" eval="-1"/>
+            <field name="nextcall" eval="datetime.now(pytz.timezone('UTC')).strftime('%Y-%m-%d 00:00:01')"/>
+        </record>
+    </data>
+</odoo>

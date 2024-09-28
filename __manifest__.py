@@ -9,6 +9,7 @@
     'depends': ['base', 'mail_bot'],
     'data': [
         'data/invoice_sequence.xml',
+        'data/ir.cron.xml',
         'views/menu.xml',
         'views/pharmacy_medicine_views.xml',
         'views/pharmacy_employee_views.xml',
@@ -19,6 +20,8 @@
         'views/pharmacy_client_views.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
+        'views/shift_schedule_views.xml',
+
     ],
     'installable': True,
     'auto_install': False,

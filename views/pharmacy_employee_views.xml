@@ -13,6 +13,11 @@
                             <h1>
                                 <field name="name" placeholder="Name"/>
                             </h1>
+                            <label for="user_id"/>
+                            <h1>
+                                <field name="user_id"/>
+                            </h1>
+
                         </div>
                         <group>
                             <field name="image" widget="image"/>
@@ -20,6 +25,7 @@
                             <field name="email"/>
                             <field name="phone"/>
                             <field name="salary"/>
+                            <field name="current_shift" readonly="1"/>
                         </group>
                     </sheet>
                 </form>
@@ -36,9 +42,11 @@
                     <field name="email"/>
                     <field name="phone"/>
                     <field name="salary"/>
+                    <field name="current_shift"/>
                 </tree>
             </field>
         </record>
+
         <record id="pharmacy_employee_kanban_view" model="ir.ui.view">
             <field name="name">pharmacy.employee.kanban</field>
             <field name="model">pharmacy.employee</field>
@@ -72,6 +80,7 @@
                 </kanban>
             </field>
         </record>
+
         <record id="pharmacy_employee_act_window" model="ir.actions.act_window">
             <field name="name">Employees</field>
             <field name="res_model">pharmacy.employee</field>

@@ -8,17 +8,28 @@ class SaleInvoice(models.Model):
     _rec_name = 'code'
 
     code = fields.Char(string='Code', required=True, default='New')
-    employee_id = fields.Many2one('pharmacy.employee', string='Employee', required=True)
+    employee_id = fields.Many2one('pharmacy.employee', string='Employee', required=True,
+                                  compute='_compute_employee_shift', store=True)
     client_id = fields.Many2one('pharmacy.client', string='Client', required=True)
-    invoice_date = fields.Date(string='Invoice Date', default=fields.Date.today)
+    invoice_date = fields.Datetime(string='Invoice Date', default=fields.Datetime.now())
     amount_total = fields.Float(string='Total Amount', compute='_compute_amount_total', store=True)
     sale_invoice_line_ids = fields.One2many('pharmacy.sale.invoice.line', 'sale_invoice_id',
-                                             string='Sale Invoice Lines')
+                                            string='Sale Invoice Lines')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('done', 'Done'),
         ('paid', 'Paid')
     ], string='Status', default='draft', required=True)
+    shift_id = fields.Many2one('pharmacy.shift', string='Shift')
+
+    @api.depends('invoice_date')
+    def _compute_employee_shift(self):
+        for record in self:
+            shift = self.env['pharmacy.shift'].search([
+                ('start_time', '<=', record.invoice_date),
+                ('end_time', '>=', record.invoice_date),
+            ], limit=1)
+            record.employee_id = shift.employee_id if shift else False
 
     @api.depends('sale_invoice_line_ids.subtotal')
     def _compute_amount_total(self):
@@ -53,7 +64,32 @@ class SaleInvoice(models.Model):
     def create(self, values):
         code = self.env['ir.sequence'].next_by_code('pharmacy.sale.invoice')
         values['code'] = code
+
+        invoice_date = values.get('invoice_date', fields.Datetime.now())
+        shift = self.env['pharmacy.shift'].search([
+            ('start_time', '<=', invoice_date),
+            ('end_time', '>=', invoice_date),
+        ], limit=1)
+        if shift:
+            values['employee_id'] = shift.employee_id.id
+
         return super(SaleInvoice, self).create(values)
+
+    def write(self, values):
+        for record in self:
+            if record.state == 'paid':
+                raise UserError("This invoice cannot be edited once it is paid.")
+
+            if 'client_id' in values:
+                new_client_id = values['client_id']
+                new_client = self.env['pharmacy.client'].browse(new_client_id)
+
+                for line in record.sale_invoice_line_ids:
+                    if line.medicine_id in new_client.allergy_ids:
+                        raise UserError(
+                            f"The new client {new_client.full_name} is allergic to {line.medicine_id.name}"
+                        )
+        return super(SaleInvoice, self).write(values)
 
 
 class SaleInvoiceLine(models.Model):
@@ -98,3 +134,4 @@ class SaleInvoiceLine(models.Model):
         if medicine.quantity < values['quantity']:
             raise UserError(f"Not enough stock for {medicine.name}. Available quantity is {medicine.quantity}.")
         return super(SaleInvoiceLine, self).create(values)
+

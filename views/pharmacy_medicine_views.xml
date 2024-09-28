@@ -85,7 +85,6 @@
                 </kanban>
             </field>
         </record>
-
         <record id="pharmacy_medicine_act_window" model="ir.actions.act_window">
             <field name="name">Pharmacy Medicine</field>
             <field name="res_model">pharmacy.medicine</field>

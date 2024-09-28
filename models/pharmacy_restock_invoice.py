@@ -4,7 +4,6 @@ from odoo.exceptions import UserError
 
 class RestockInvoice(models.Model):
     _name = 'pharmacy.restock.invoice'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Restock Invoice'
     _rec_name = 'code'
 
