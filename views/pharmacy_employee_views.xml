@@ -24,8 +24,13 @@
                             <field name="position"/>
                             <field name="email"/>
                             <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="registration_date"/>
                             <field name="salary"/>
+                            <field name="original_salary" readonly="1"/>
                             <field name="current_shift" readonly="1"/>
+                            <field name="loyalty_points" readonly="1"/>
                         </group>
                     </sheet>
                 </form>
@@ -41,8 +46,11 @@
                     <field name="position"/>
                     <field name="email"/>
                     <field name="phone"/>
+                    <field name="registration_date"/>
                     <field name="salary"/>
                     <field name="current_shift"/>
+                    <field name="loyalty_points"/>
+                    <field name="original_salary"/>
                 </tree>
             </field>
         </record>

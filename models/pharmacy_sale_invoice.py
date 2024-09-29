@@ -25,6 +25,8 @@ class SaleInvoice(models.Model):
     ], string='Status', default='draft', required=True)
     shift_id = fields.Many2one('pharmacy.shift', string='Shift')
     created_by = fields.Many2one('res.users', string='Created By', default=lambda self: self.env.user)
+    employee_loyalty_points = fields.Integer(related='employee_id.loyalty_points', string='Employee Loyalty Points',
+                                             readonly=True)
 
     @api.depends('invoice_date')
     def _compute_employee_shift(self):
@@ -45,8 +47,6 @@ class SaleInvoice(models.Model):
     def _compute_manager(self):
         for record in self:
             default_manager = self.env['pharmacy.employee'].search([('position', '=', 'manager')], limit=1)
-
-            # Set the manager to the default manager if found, otherwise False
             record.manager = default_manager.id if default_manager else False
 
     @api.depends('sale_invoice_line_ids.subtotal')
@@ -70,11 +70,19 @@ class SaleInvoice(models.Model):
             medicine.quantity -= line.quantity
             medicine.write({'quantity': medicine.quantity})
         self.write({'state': 'done'})
+        self._award_loyalty_points(self)
 
     def action_paid(self):
-        if self.state != 'done':
-            raise UserError("Only done invoices can be marked as paid.")
         self.write({'state': 'paid'})
+
+    def _award_loyalty_points(self, invoice):
+        if invoice.employee_id.user_id.has_group('pharmacy_management.group_pharmacy_seller'):
+            total_products = len(invoice.sale_invoice_line_ids)
+            if invoice.amount_total > 15 and total_products > 5:
+                invoice.employee_id.loyalty_points += 1
+                if invoice.employee_id.loyalty_points >= 100:
+                    invoice.employee_id.salary += 50
+                    invoice.employee_id.loyalty_points = 0
 
     @api.model
     def create(self, values):

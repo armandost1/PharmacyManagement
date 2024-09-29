@@ -20,9 +20,9 @@
                                 <field name="supplier_id" placeholder="Select Supplier"/>
                             </group>
                             <group>
-                                <field name="expiry_date" placeholder="Enter Expiry Date"/>
                                 <field name="quantity" readonly="1" />
-                                <field name="price" placeholder="Enter Price" groups="pharmacy_management.group_pharmacy_manager"/>
+                                <field name="price" groups="pharmacy_management.group_pharmacy_manager"/>
+                                <field name="price" groups="base.group_system"/>
                             </group>
                         </group>
                     </sheet>
@@ -42,7 +42,6 @@
                 <tree string="Pharmacy Medicine">
                     <field name="name"/>
                     <field name="supplier_id"/>
-                    <field name="expiry_date"/>
                     <field name="quantity"/>
                     <field name="price"/>
                 </tree>
@@ -57,7 +56,6 @@
                     <field name="id"/>
                     <field name="name"/>
                     <field name="price"/>
-                    <field name="expiry_date"/>
                     <field name="quantity"/>
                     <field name="image" widget="image" class="oe_avatar"/>
                     <templates>

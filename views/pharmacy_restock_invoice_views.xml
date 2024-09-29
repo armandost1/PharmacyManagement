@@ -24,10 +24,11 @@
                         </div>
                         <group>
                             <group>
-                                <field name="supplier_id"/>
                                 <field name="invoice_date" readonly="1"/>
+                                <field name="created_by" readonly="1" invisible="state == 'draft'"/>
                             </group>
                             <group>
+                                <field name="supplier_id"/>
                                 <field name="amount_total" readonly="1"/>
                             </group>
                         </group>

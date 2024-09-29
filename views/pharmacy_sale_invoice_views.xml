@@ -30,6 +30,7 @@
                                 <field name="created_by" readonly="1" invisible="state == 'draft'"/>
                             </group>
                             <group>
+                                <field name="employee_loyalty_points" readonly="1" groups="pharmacy_management.group_pharmacy_seller"/>
                                 <field name="client_id"/>
                                 <field name="amount_total" readonly="1"/>
                             </group>
@@ -63,6 +64,7 @@
                     <field name="amount_total"/>
                     <field name="state"/>
                     <field name="created_by"/>
+                    <field name="employee_loyalty_points"/>
                 </tree>
             </field>
         </record>

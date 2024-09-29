@@ -3,7 +3,7 @@
     <data noupdate="1">
         <record id="ir_cron_update_shift_dates" model="ir.cron">
             <field name="name">Update Shift Dates</field>
-            <field name="model_id" ref="pharmacy_management.model_pharmacy_shift"/> <!-- Replace with your actual module name -->
+            <field name="model_id" ref="pharmacy_management.model_pharmacy_shift"/>
             <field name="state">code</field>
             <field name="code">model.update_shift_dates()</field>
             <field name="active" eval="True"/>
@@ -11,6 +11,32 @@
             <field name="interval_number" eval="1"/>
             <field name="numbercall" eval="-1"/>
             <field name="nextcall" eval="datetime.now(pytz.timezone('UTC')).strftime('%Y-%m-%d 00:00:01')"/>
+        </record>
+
+
+                <!-- New Scheduled Action: Raise Employee Salaries -->
+        <record id="ir_cron_raise_employee_salaries" model="ir.cron">
+            <field name="name">Raise Employee Salaries</field>
+            <field name="model_id" ref="pharmacy_management.model_pharmacy_employee"/>
+            <field name="state">code</field>
+            <field name="code">model._raise_employee_salaries()</field>
+            <field name="active" eval="True"/>
+            <field name="interval_type">days</field>
+            <field name="interval_number" eval="1"/>
+            <field name="numbercall" eval="-1"/>
+            <field name="nextcall" eval="datetime.now(pytz.timezone('UTC')).strftime('%Y-%m-%d 00:00:01')"/>
+        </record>
+
+                <!-- New Scheduled Action: Reset loyalty points and salary -->
+        <record id="ir_cron_reset_salaries" model="ir.cron">
+            <field name="name">Reset Employee Salaries and Points</field>
+            <field name="model_id" ref="pharmacy_management.model_pharmacy_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.reset_salaries()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="(datetime.now(pytz.timezone('UTC')) + timedelta(days=30)).strftime('%Y-%m-%d 00:00:01')"/>
+            <field name="numbercall">-1</field>
         </record>
     </data>
 </odoo>

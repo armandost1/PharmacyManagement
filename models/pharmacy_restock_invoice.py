@@ -15,16 +15,12 @@ class RestockInvoice(models.Model):
                                                         ('paid', 'Paid')], default='draft')
     restock_invoice_line_ids = fields.One2many('pharmacy.restock.invoice.line',
                                                'restock_invoice_id', string='Restock Invoice Lines')
+    created_by = fields.Many2one('res.users', string='Created By', default=lambda self: self.env.user)
 
     @api.depends('restock_invoice_line_ids.subtotal')
     def _compute_amount_total(self):
         for record in self:
             record.amount_total = sum(line.subtotal for line in record.restock_invoice_line_ids)
-
-    @api.model
-    def create(self, values):
-        values['code'] = self.env['ir.sequence'].next_by_code('pharmacy.restock.invoice')
-        return super(RestockInvoice, self).create(values)
 
     def action_done(self):
         for invoice_line in self.restock_invoice_line_ids:
@@ -33,6 +29,16 @@ class RestockInvoice(models.Model):
 
     def action_paid(self):
         self.state = 'paid'
+
+    @api.model
+    def create(self, values):
+        values['code'] = self.env['ir.sequence'].next_by_code('pharmacy.restock.invoice')
+        return super(RestockInvoice, self).create(values)
+
+    def write(self, values):
+        if self.state == 'paid':
+            raise UserError("You cannot edit a paid invoice.")
+        return super(RestockInvoice, self).write(values)
 
 
 class RestockInvoiceLine(models.Model):
@@ -56,6 +62,12 @@ class RestockInvoiceLine(models.Model):
     def _compute_subtotal(self):
         for line in self:
             line.subtotal = line.quantity * line.price_unit
+
+    @api.constrains('quantity')
+    def _check_quantity(self):
+        for line in self:
+            if line.quantity <= 0:
+                raise UserError("Quantity must be greater than zero.")
 
     @api.model
     def create(self, values):

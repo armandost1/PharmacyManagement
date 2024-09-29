@@ -1,9 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
-import logging
 from datetime import datetime
 
-_logger = logging.getLogger(__name__)
 
 class PharmacyShift(models.Model):
     _name = 'pharmacy.shift'

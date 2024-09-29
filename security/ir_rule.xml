@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_seller_rule" model="ir.rule">
+            <field name="name">Employee Seller Rule</field>
+            <field name="model_id" ref="model_pharmacy_employee"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_pharmacy_seller'))]"/>
+        </record>
+
+        <record id="shift_seller_rule" model="ir.rule">
+            <field name="name">Shift Seller Rule</field>
+            <field name="model_id" ref="model_pharmacy_shift"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_pharmacy_seller'))]"/>
+        </record>
+
+        <record id="invoice_employee_rule" model="ir.rule">
+            <field name="name">Invoice Employee Rule</field>
+            <field name="model_id" ref="model_pharmacy_sale_invoice"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_pharmacy_seller'))]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -20,6 +20,7 @@
         'views/pharmacy_client_views.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
+        'security/ir_rule.xml',
         'views/shift_schedule_views.xml',
 
     ],

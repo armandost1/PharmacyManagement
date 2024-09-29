@@ -85,7 +85,6 @@
                     <field name="name"/>
                     <field name="price"/>
                     <field name="quantity"/>
-                    <field name="expiry_date"/>
                     <field name="supplier_id"/>
                 </tree>
             </field>
