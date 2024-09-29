@@ -21,6 +21,20 @@ class Employee(models.Model):
     shift_ids = fields.One2many('pharmacy.shift', 'employee_id', string='Shifts')
 
 
+    def name_get(self):
+        res = []
+        for employee in self:
+            try:
+                # Check if the current user is an admin
+                if not self.env.user.has_group('base.group_system'):
+                    raise UserError("You don't have access to see this record.")
+
+                res.append((employee.id, employee.name))
+            except UserError as e:
+                # Append the error message instead of the employee's name
+                res.append((employee.id, str(e)))
+        return res
+
     @api.depends('shift_ids.start_time', 'shift_ids.end_time')
     def _compute_current_shift(self):
         for employee in self:

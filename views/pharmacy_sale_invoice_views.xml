@@ -24,8 +24,10 @@
                         </div>
                         <group>
                             <group>
-                                <field name="employee_id"/>
+                                <field name="manager" groups="pharmacy_management.group_pharmacy_manager" invisible="state != 'draft'"/>
+                                <field name="employee_id" groups="pharmacy_management.group_pharmacy_seller" invisible="state != 'draft'"/>
                                 <field name="invoice_date" readonly="1"/>
+                                <field name="created_by" readonly="1" invisible="state == 'draft'"/>
                             </group>
                             <group>
                                 <field name="client_id"/>
@@ -55,10 +57,12 @@
             <field name="arch" type="xml">
                 <tree string="Sale Invoices">
                     <field name="code"/>
+                    <field name="manager"/>
                     <field name="employee_id"/>
                     <field name="invoice_date"/>
                     <field name="amount_total"/>
                     <field name="state"/>
+                    <field name="created_by"/>
                 </tree>
             </field>
         </record>

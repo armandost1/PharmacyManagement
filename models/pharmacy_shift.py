@@ -1,6 +1,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+import logging
+from datetime import datetime
 
+_logger = logging.getLogger(__name__)
 
 class PharmacyShift(models.Model):
     _name = 'pharmacy.shift'
@@ -40,8 +43,8 @@ class PharmacyShift(models.Model):
         shifts = self.search([])
 
         for shift in shifts:
-            new_start_time = fields.Datetime.combine(current_datetime.date(), shift.start_time.time())
-            new_end_time = fields.Datetime.combine(current_datetime.date(), shift.end_time.time())
+            new_start_time = datetime.combine(current_datetime.date(), shift.start_time.time())
+            new_end_time = datetime.combine(current_datetime.date(), shift.end_time.time())
             shift.write({
                 'start_time': new_start_time,
                 'end_time': new_end_time,
