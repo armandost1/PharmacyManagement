@@ -9,28 +9,28 @@
                 <form string="Employee">
                     <sheet>
                         <div class="oe_title">
-                            <label for="name"/>
                             <h1>
                                 <field name="name" placeholder="Name"/>
                             </h1>
-                            <label for="user_id"/>
                             <h1>
-                                <field name="user_id"/>
+                                <field name="user_id" groups="pharmacy_management.group_pharmacy_manager"/>
+                                <field name="user_id" groups="base.group_system"/>
                             </h1>
 
                         </div>
                         <group>
                             <field name="image" widget="image"/>
-                            <field name="position"/>
+                            <field name="position" groups="base.group_system"/>
                             <field name="email"/>
                             <field name="phone"/>
                         </group>
                         <group>
-                            <field name="registration_date"/>
-                            <field name="salary"/>
-                            <field name="original_salary" readonly="1"/>
+                            <field name="registration_date" groups="base.group_system"/>
+                            <field name="salary" readonly="1" groups="pharmacy_management.group_pharmacy_seller"/>
+                            <field name="salary" groups="base.group_system"/>
+                            <field name="original_salary" groups="base.group_system"/>
                             <field name="current_shift" readonly="1"/>
-                            <field name="loyalty_points" readonly="1"/>
+                            <field name="points" readonly="1"/>
                         </group>
                     </sheet>
                 </form>
@@ -49,7 +49,7 @@
                     <field name="registration_date"/>
                     <field name="salary"/>
                     <field name="current_shift"/>
-                    <field name="loyalty_points"/>
+                    <field name="points"/>
                     <field name="original_salary"/>
                 </tree>
             </field>

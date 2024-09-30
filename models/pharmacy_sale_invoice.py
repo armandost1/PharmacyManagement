@@ -25,8 +25,6 @@ class SaleInvoice(models.Model):
     ], string='Status', default='draft', required=True)
     shift_id = fields.Many2one('pharmacy.shift', string='Shift')
     created_by = fields.Many2one('res.users', string='Created By', default=lambda self: self.env.user)
-    employee_loyalty_points = fields.Integer(related='employee_id.loyalty_points', string='Employee Loyalty Points',
-                                             readonly=True)
 
     @api.depends('invoice_date')
     def _compute_employee_shift(self):
@@ -70,20 +68,18 @@ class SaleInvoice(models.Model):
             medicine.quantity -= line.quantity
             medicine.write({'quantity': medicine.quantity})
         self.write({'state': 'done'})
-        self._award_loyalty_points(self)
+        self._award_points()
 
     def action_paid(self):
         self.write({'state': 'paid'})
 
-    def _award_loyalty_points(self, invoice):
-        if invoice.employee_id.user_id.has_group('pharmacy_management.group_pharmacy_seller'):
-            total_products = len(invoice.sale_invoice_line_ids)
-            if invoice.amount_total > 15 and total_products > 5:
-                invoice.employee_id.loyalty_points += 1
-                if invoice.employee_id.loyalty_points >= 100:
-                    invoice.employee_id.salary += 50
-                    invoice.employee_id.loyalty_points = 0
-
+    def _award_points(self):
+        employee = self.env['pharmacy.employee'].search([('user_id', '=', self.env.user.id)], limit=1)
+        if employee and employee.position == 'seller':
+            total_products = len(self.sale_invoice_line_ids)
+            if self.amount_total >= 50 and total_products >= 4:
+                employee.points += 1  # Award 1 point for this invoice
+                employee._award_salary_increase()  # Check and possibly increase salary
     @api.model
     def create(self, values):
         code = self.env['ir.sequence'].next_by_code('pharmacy.sale.invoice')

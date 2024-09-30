@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
+                <!-- New Scheduled Action: Shift Update -->
         <record id="ir_cron_update_shift_dates" model="ir.cron">
             <field name="name">Update Shift Dates</field>
             <field name="model_id" ref="pharmacy_management.model_pharmacy_shift"/>
@@ -27,16 +28,15 @@
             <field name="nextcall" eval="datetime.now(pytz.timezone('UTC')).strftime('%Y-%m-%d 00:00:01')"/>
         </record>
 
-                <!-- New Scheduled Action: Reset loyalty points and salary -->
-        <record id="ir_cron_reset_salaries" model="ir.cron">
-            <field name="name">Reset Employee Salaries and Points</field>
-            <field name="model_id" ref="pharmacy_management.model_pharmacy_employee"/>
+                <!-- New Scheduled Action: Reset employee points and salaries -->
+        <record id="ir_cron_monthly_reset_employee_data" model="ir.cron">
+            <field name="name">Reset Employee Points and Salaries</field>
+            <field name="model_id" ref="model_pharmacy_employee"/>
             <field name="state">code</field>
-            <field name="code">model.reset_salaries()</field>
-            <field name="interval_number">1</field>
+            <field name="code">model.reset_monthly_data()</field>
             <field name="interval_type">months</field>
-            <field name="nextcall" eval="(datetime.now(pytz.timezone('UTC')) + timedelta(days=30)).strftime('%Y-%m-%d 00:00:01')"/>
-            <field name="numbercall">-1</field>
+            <field name="interval_number">1</field>
+            <field name="nextcall" eval="(datetime.now(pytz.timezone('UTC')) + relativedelta(day=1, months=1)).strftime('%Y-%m-%d 00:00:01')"/>
         </record>
     </data>
 </odoo>

@@ -1,6 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 pharmacy_employee_access_manager,pharmacy.employee access manager,model_pharmacy_employee,group_pharmacy_manager,1,1,1,1
-pharmacy_employee_access_seller,pharmacy.employee access seller,model_pharmacy_employee,group_pharmacy_seller,1,0,0,0
+pharmacy_employee_access_seller,pharmacy.employee access seller,model_pharmacy_employee,group_pharmacy_seller,1,1,0,0
 pharmacy_sale_invoice_access_manager,pharmacy.sale.invoice access manager,model_pharmacy_sale_invoice,group_pharmacy_manager,1,1,1,1
 pharmacy_sale_invoice_access_seller,pharmacy.sale.invoice access seller,model_pharmacy_sale_invoice,group_pharmacy_seller,1,1,1,0
 pharmacy_sale_invoice_line_access_manager,pharmacy.sale.invoice.line access manager,model_pharmacy_sale_invoice_line,group_pharmacy_manager,1,1,1,1

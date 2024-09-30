@@ -1,4 +1,4 @@
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, date
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
@@ -19,24 +19,40 @@ class Employee(models.Model):
     current_shift = fields.Char(string='Working Shift', compute='_compute_current_shift')
     shift_ids = fields.One2many('pharmacy.shift', 'employee_id', string='Shifts')
     registration_date = fields.Date(string='Registration Date', required=True)
-    loyalty_points = fields.Integer(string='Loyalty Points', default=0)
+    points = fields.Integer(string='Points', default=0)
     image = fields.Image(string='Image')
-    original_salary = fields.Float(string='Original Salary', compute='_compute_original_salary', store=True)
+    original_salary = fields.Float(string='Original Salary', required=True)
+    last_salary_raise_date = fields.Date(string='Last Salary Raise Date')
+    last_salary_increase_awarded = fields.Boolean(default=False)
 
+    salary_increase_amount = 50
+    salary_increase_threshold = 30
+
+    def _award_salary_increase(self):
+        for employee in self:
+            if employee.points >= self.salary_increase_threshold:
+                # Check if a raise has already been awarded this month
+                if not employee.last_salary_increase_awarded:
+                    employee.salary += self.salary_increase_amount
+                    employee.last_salary_raise_date = date.today()  # Update last raise date
+                    employee.last_salary_increase_awarded = True  # Mark as awarded
+
+    @api.model
+    def reset_monthly_data(self):
+        today = date.today()
+        for employee in self.search([]):
+            if employee.last_salary_raise_date and (
+                employee.last_salary_raise_date.month != today.month or
+                employee.last_salary_raise_date.year != today.year
+            ):
+                employee.points = 0
+                employee.salary = employee.original_salary
+                employee.last_salary_increase_awarded = False
 
     @api.depends('salary')
     def _compute_original_salary(self):
         for employee in self:
             employee.original_salary = employee.salary
-
-    def add_loyalty_points(self, amount):
-        self.loyalty_points += amount
-        if self.loyalty_points >= 100:
-            self.give_salary_increase()
-
-    def give_salary_increase(self):
-        self.salary += 50
-        self.loyalty_points = 0
 
     @api.depends('shift_ids.start_time', 'shift_ids.end_time')
     def _compute_current_shift(self):
@@ -64,12 +80,6 @@ class Employee(models.Model):
                 if len(number.phone) > 15:
                     raise UserError("The phone number must contain up to 15 digits.")
 
-    @api.model
-    def reset_salaries(self):
-        for employee in self.search([]):
-            employee.loyalty_points = 0
-            employee.salary = employee.original_salary
-
 
 class EmployeeSalaryRaise(models.Model):
     _inherit = 'pharmacy.employee'
@@ -83,4 +93,5 @@ class EmployeeSalaryRaise(models.Model):
                 registration_time = fields.Date.from_string(employee.registration_date)
                 if today >= registration_time + timedelta(days=90):
                     employee.salary += 100
+                    employee.original_salary = employee.salary
                     employee.registration_date = today
