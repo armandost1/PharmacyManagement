@@ -12,11 +12,13 @@
 
         <menuitem id="pharmacy_medicine_action_menu" name="Add Medicines" parent="pharmacy_medicine_menu" action="pharmacy_medicine_act_window" sequence="4"/>
 
-        <menuitem id="pharmacy_medicine_category_menu" name="Category" parent="pharmacy_medicine_menu" sequence="4"/>
+        <menuitem id="pharmacy_medicine_category_menu" name="Category" parent="pharmacy_medicine_menu" sequence="5"/>
 
-        <menuitem id="pharmacy_employee_menu" name="Employee" parent="pharmacy_root_menu" sequence="5"/>
+        <menuitem name="Employees" id="pharmacy_employee_menu" parent="pharmacy_root_menu" sequence="5"/>
 
-        <menuitem id="pharmacy_shift_menu" name="Shift Schedule" parent="pharmacy_root_menu" sequence="6"/>
+        <menuitem name="Employees" id="pharmacy_employee_action_menu" parent="pharmacy_employee_menu" action="pharmacy_employee_act_window" sequence="5"/>
+
+        <menuitem name="Shift Schedule"  id="pharmacy_shift_menu" parent="pharmacy_employee_menu" action="action_pharmacy_shift" sequence="6"/>
 
         <menuitem id="pharmacy_supplier_menu" name="Suppliers" parent="pharmacy_root_menu" sequence="7"/>
 

@@ -95,7 +95,6 @@
             <field name="view_mode">kanban,tree,form</field>
         </record>
 
-        <menuitem name="Employees" id="pharmacy_employee_menu" parent="pharmacy_root_menu" action="pharmacy_employee_act_window"/>
 
     </data>
 </odoo>

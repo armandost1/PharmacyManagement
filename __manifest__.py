@@ -19,6 +19,8 @@
         'views/pharmacy_supplier_views.xml',
         'views/pharmacy_restock_invoice_views.xml',
         'views/pharmacy_client_views.xml',
+        'report/sale_invoice_report.xml',
+        'wizard/sale_invoice_wizard_views.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
         'security/ir_rule.xml',
