@@ -12,6 +12,7 @@
         'data/ir.cron.xml',
         'views/menu.xml',
         'views/pharmacy_medicine_views.xml',
+        'views/pharmacy_shift_schedule_views.xml',
         'views/pharmacy_employee_views.xml',
         'views/pharmacy_sale_invoice_views.xml',
         'views/pharmacy_medicine_category_views.xml',
@@ -21,7 +22,6 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'security/ir_rule.xml',
-        'views/shift_schedule_views.xml',
 
     ],
     'installable': True,

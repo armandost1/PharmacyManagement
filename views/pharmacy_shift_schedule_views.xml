@@ -38,6 +38,6 @@
             <field name="view_id" ref="view_pharmacy_shift_tree"/>
         </record>
 
-        <menuitem name="Shift Schedule"  id="menu_pharmacy_shift" parent="pharmacy_root_menu" action="action_pharmacy_shift"/>
+        <menuitem name="Shift Schedule"  id="pharmacy_shift_menu" parent="pharmacy_root_menu" action="action_pharmacy_shift"/>
     </data>
 </odoo>

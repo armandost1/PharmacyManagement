@@ -74,7 +74,7 @@
 
         <menuitem name="Medicine Categories"
                   id="pharmacy_medicine_category_menu"
-                  parent="pharmacy_root_menu"
+                  parent="pharmacy_medicine_menu"
                   action="pharmacy_medicine_category_act_window"/>
 
         <record id="pharmacy_medicine_tree_view" model="ir.ui.view">
