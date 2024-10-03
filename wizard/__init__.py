@@ -1,1 +1,2 @@
-from . import sale_invoice_wizard
+
+from . import employee_medicine_sales_wizard

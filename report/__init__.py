@@ -1,1 +1,2 @@
-from . import sale_invoice_report
+
+from . import employee_medicine_sales_report

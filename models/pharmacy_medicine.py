@@ -1,7 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
-
 class Medicine(models.Model):
     _name = 'pharmacy.medicine'
     _inherit = ['mail.thread', 'mail.activity.mixin']

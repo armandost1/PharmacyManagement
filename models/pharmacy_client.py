@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
+
 class Client(models.Model):
     _name = 'pharmacy.client'
     _description = 'Client'
