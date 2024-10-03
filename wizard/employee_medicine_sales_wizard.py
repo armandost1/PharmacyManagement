@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, fields
+
 
 class EmployeeMedicineSalesWizard(models.TransientModel):
     _name = 'employee.medicine.sales.wizard'
@@ -17,3 +18,5 @@ class EmployeeMedicineSalesWizard(models.TransientModel):
             'end_date': self.end_date,
         }
         return self.env.ref('pharmacy_management.action_employee_medicine_sales_report').report_action(self, data=data)
+
+

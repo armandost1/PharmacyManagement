@@ -21,7 +21,6 @@ class EmployeeMedicineSalesReport(models.AbstractModel):
 
         invoice_lines = self.env['pharmacy.sale.invoice.line'].search(domain)
 
-        # Group data by medicine and employee
         grouped_data = {}
         for line in invoice_lines:
             key = (line.medicine_id.name, line.sale_invoice_id.employee_id.name)

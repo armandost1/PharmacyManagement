@@ -31,11 +31,11 @@ class Employee(models.Model):
     def _award_salary_increase(self):
         for employee in self:
             if employee.points >= self.salary_increase_threshold:
-                # Check if a raise has already been awarded this month
+
                 if not employee.last_salary_increase_awarded:
                     employee.salary += self.salary_increase_amount
-                    employee.last_salary_raise_date = date.today()  # Update last raise date
-                    employee.last_salary_increase_awarded = True  # Mark as awarded
+                    employee.last_salary_raise_date = date.today()
+                    employee.last_salary_increase_awarded = True
 
     @api.model
     def reset_monthly_data(self):
