@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <!-- Wizard View -->
+
         <record id="view_employee_medicine_sales_wizard" model="ir.ui.view">
             <field name="name">Employee Medicine Sales Wizard</field>
             <field name="model">employee.medicine.sales.wizard</field>
@@ -25,9 +25,9 @@
             </field>
         </record>
 
-        <!-- Wizard Action -->
+
         <record id="action_employee_medicine_sales_wizard" model="ir.actions.act_window">
-            <field name="name">Employee Medicine Sales Report</field>
+            <field name="name">Employee Sales Report</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">employee.medicine.sales.wizard</field>
             <field name="view_mode">form</field>
@@ -36,7 +36,8 @@
         </record>
 
 
-        <!-- Menu Item -->
+        <menuitem id="reports_root" name="Reports" parent="pharmacy_root_menu" sequence="12"/>
+
         <menuitem id="menu_employee_medicine_sales_report" name="Employee Sales Report"
                   parent="reports_root"
                   action="action_employee_medicine_sales_wizard"

@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="1">
 
-                <!-- New Scheduled Action: Shift Update -->
+                <!-- Schedule: Shift Update -->
         <record id="ir_cron_update_shift_dates" model="ir.cron">
             <field name="name">Update Shift Dates</field>
             <field name="model_id" ref="pharmacy_management.model_pharmacy_shift"/>
@@ -12,10 +12,10 @@
             <field name="interval_type">days</field>
             <field name="interval_number" eval="1"/>
             <field name="numbercall" eval="-1"/>
-            <field name="nextcall" eval="datetime.now(pytz.timezone('UTC')).strftime('%Y-%m-%d 00:00:01')"/>
+            <field name="nextcall" eval="(datetime.now(pytz.UTC) + timedelta(days=1)).strftime('%Y-%m-%d 00:00:01')"/>
         </record>
 
-                <!-- New Scheduled Action: Raise Employee Salaries -->
+                <!-- Schedule : Raise Employee Salaries -->
         <record id="ir_cron_raise_employee_salaries" model="ir.cron">
             <field name="name">Raise Employee Salaries</field>
             <field name="model_id" ref="pharmacy_management.model_pharmacy_employee"/>
@@ -28,7 +28,7 @@
             <field name="nextcall" eval="datetime.now(pytz.timezone('UTC')).strftime('%Y-%m-%d 00:00:01')"/>
         </record>
 
-                <!-- New Scheduled Action: Reset employee points and salaries -->
+                <!-- Schedule: Reset employee points and salaries -->
         <record id="ir_cron_monthly_reset_employee_data" model="ir.cron">
             <field name="name">Reset Employee Points and Salaries</field>
             <field name="model_id" ref="model_pharmacy_employee"/>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-
-        <!-- Report Action -->
         <record id="action_employee_medicine_sales_report" model="ir.actions.report">
             <field name="name">Employee Medicine Sales Report</field>
             <field name="model">pharmacy.sale.invoice.line</field>
@@ -11,70 +9,69 @@
             <field name="report_file">report</field>
         </record>
 
-        <!-- Report Template -->
         <template id="report_employee_medicine_sales">
             <t t-set="data_report_landscape" t-value="True"/>
             <t t-set="full_width" t-value="True"/>
             <t t-call="web.html_container">
-                <!-- Custom Header -->
+
                 <div class="header">
-                    <h3 class="text-center">Employee Medicine Sales Report</h3>
+                    <h3 class="text-center">Employee Sales Report</h3>
                     <p class="text-center">
-                        <t t-esc="datetime.datetime.now().strftime('%B %d, %Y')" /> <!-- Current Date -->
+                        <t t-esc="datetime.datetime.now().strftime('%B %d, %Y')" />
                     </p>
                 </div>
 
-                <!-- Report Content -->
+
                 <div class="page">
-                    <div class="table-responsive">
-                        <table class="table table-condensed table-bordered">
-                            <thead style="background-color: #f0f0f0;">
-                                <tr>
-                                    <th style="padding: 8px;">Medicine</th>
-                                    <th style="padding: 8px;">Employee</th>
-                                    <th style="padding: 8px;">Price Unit</th>
-                                    <th style="padding: 8px;">Total Quantity Sold</th>
-                                    <th style="padding: 8px;">Total Amount Sold</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-foreach="docs" t-as="doc">
+                    <div style="text-align: center;">
+                        <div class="table-responsive" style="display: inline-block;">
+                            <table class="table table-condensed table-bordered" style="margin: auto; width: 100%;">
+                                <thead style="background-color: #f0f0f0;">
                                     <tr>
-                                        <td style="padding: 8px;">
-                                            <span t-esc="doc['medicine']"/>
-                                        </td>
-                                        <td style="padding: 8px;">
-                                            <span t-esc="doc['employee']"/>
+                                        <th style="padding: 8px; width: 25%;">Medicine</th>
+                                        <th style="padding: 8px; width: 25%;">Employee</th>
+                                        <th style="padding: 8px; width: 15%; text-align: right;">Price Unit</th>
+                                        <th style="padding: 8px; width: 15%; text-align: right;">Total Quantity Sold</th>
+                                        <th style="padding: 8px; width: 20%; text-align: right;">Total Amount Sold</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="docs" t-as="doc">
+                                        <tr>
+                                            <td style="padding: 8px;">
+                                                <span t-esc="doc['medicine']"/>
+                                            </td>
+                                            <td style="padding: 8px;">
+                                                <span t-esc="doc['employee']"/>
+                                            </td>
+                                            <td style="padding: 8px; text-align: right;">
+                                                <span t-esc="'{:.2f}'.format(doc['price_unit'])"/>
+                                            </td>
+                                            <td style="padding: 8px; text-align: right;">
+                                                <span t-esc="doc['total_qty']"/>
+                                            </td>
+                                            <td style="padding: 8px; text-align: right;">
+                                                <span t-esc="'{:.2f}'.format(doc['total_amount'])"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+
+                                    <tr style="background-color: #f9f9f9; font-weight: bold;">
+                                        <td colspan="3" style="padding: 8px;">Total</td>
+                                        <td style="padding: 8px; text-align: right;">
+                                            <span t-esc="sum(doc['total_qty'] for doc in docs)"/>
                                         </td>
                                         <td style="padding: 8px; text-align: right;">
-                                            <span t-esc="'{:.2f}'.format(doc['price_unit'])"/>
-                                        </td>
-                                        <td style="padding: 8px; text-align: right;">
-                                            <span t-esc="doc['total_qty']"/>
-                                        </td>
-                                        <td style="padding: 8px; text-align: right;">
-                                            <span t-esc="'{:.2f}'.format(doc['total_amount'])"/>
+                                            <span t-esc="'{:.2f}'.format(sum(doc['total_amount'] for doc in docs))"/>
                                         </td>
                                     </tr>
-                                </t>
-                                <!-- Totals Row -->
-                                <tr style="background-color: #f9f9f9; font-weight: bold;">
-                                    <td colspan="3" style="padding: 8px;">Total</td>
-                                    <td style="padding: 8px; text-align: right;">
-                                        <span t-esc="sum(doc['total_qty'] for doc in docs)"/>
-                                    </td>
-                                    <td style="padding: 8px; text-align: right;">
-                                        <span t-esc="'{:.2f}'.format(sum(doc['total_amount'] for doc in docs))"/>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Custom Footer -->
                 <div class="footer">
-                    <p class="text-center">Generated by Pharmacy Management System</p>
+                    <p class="text-center">Pharmacy Management System</p>
                 </div>
             </t>
         </template>

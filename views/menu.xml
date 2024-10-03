@@ -4,25 +4,26 @@
 
         <menuitem id="pharmacy_root_menu" name="Pharmacy Management" sequence="1"/>
 
-        <menuitem id="pharmacy_sale_invoice_menu" name="Sale Invoices" parent="pharmacy_root_menu" sequence="2"/>
+        <menuitem id="pharmacy_medicine_menu" name="Medicines" parent="pharmacy_root_menu" sequence="2"/>
 
-        <menuitem id="pharmacy_restock_invoice_menu" name="Restock Invoices" parent="pharmacy_root_menu" sequence="3"/>
+        <menuitem id="pharmacy_medicine_action_menu" name="Add Medicines" parent="pharmacy_medicine_menu" action="pharmacy_medicine_act_window" sequence="2"/>
 
-        <menuitem id="pharmacy_medicine_menu" name="Medicines" parent="pharmacy_root_menu" sequence="4"/>
+        <menuitem id="pharmacy_medicine_category_menu" name="Category" parent="pharmacy_medicine_menu" sequence="3"/>
 
-        <menuitem id="pharmacy_medicine_action_menu" name="Add Medicines" parent="pharmacy_medicine_menu" action="pharmacy_medicine_act_window" sequence="4"/>
 
-        <menuitem id="pharmacy_medicine_category_menu" name="Category" parent="pharmacy_medicine_menu" sequence="5"/>
+        <menuitem id="pharmacy_sale_invoice_menu" name="Sale Invoices" parent="pharmacy_root_menu" sequence="4"/>
 
-        <menuitem name="Employees" id="pharmacy_employee_menu" parent="pharmacy_root_menu" sequence="5"/>
+        <menuitem id="pharmacy_restock_invoice_menu" name="Restock Invoices" parent="pharmacy_root_menu" sequence="5"/>
 
-        <menuitem name="Employees" id="pharmacy_employee_action_menu" parent="pharmacy_employee_menu" action="pharmacy_employee_act_window" sequence="5"/>
+        <menuitem name="Employees" id="pharmacy_employee_menu" parent="pharmacy_root_menu" sequence="6"/>
 
-        <menuitem name="Shift Schedule"  id="pharmacy_shift_menu" parent="pharmacy_employee_menu" action="action_pharmacy_shift" sequence="6"/>
+        <menuitem name="Employees" id="pharmacy_employee_action_menu" parent="pharmacy_employee_menu" action="pharmacy_employee_act_window" sequence="7"/>
 
-        <menuitem id="pharmacy_supplier_menu" name="Suppliers" parent="pharmacy_root_menu" sequence="7"/>
+        <menuitem name="Shift Schedule"  id="pharmacy_shift_menu" parent="pharmacy_employee_menu" action="action_pharmacy_shift" sequence="8"/>
 
-        <menuitem id="pharmacy_client_menu" name="Clients" parent="pharmacy_root_menu" sequence="8"/>
+        <menuitem id="pharmacy_supplier_menu" name="Suppliers" parent="pharmacy_root_menu" sequence="9"/>
+
+        <menuitem id="pharmacy_client_menu" name="Clients" parent="pharmacy_root_menu" sequence="10"/>
 
     </data>
 </odoo>
